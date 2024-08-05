@@ -1,0 +1,54 @@
+{
+    "name": "QuantumEye Backend",
+    "dockerComposeFile": ["../../docker-compose.yml"],
+    "service": "backend",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                // "python.linting.enabled": true,
+                // "python.linting.pylintEnabled": true,
+                "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+                "python.formatting.blackPath": "/usr/local/bin/black",
+                "python.formatting.yapfPath": "/usr/local/bin/yapf"
+                // "python.linting.banditPath": "/usr/local/bin/bandit",
+                // "python.linting.flake8Path": "/usr/local/bin/flake8",
+                // "python.linting.mypyPath": "/usr/local/bin/mypy",
+                // "python.linting.pycodestylePath": "/usr/local/bin/pycodestyle",
+                // "python.linting.pydocstylePath": "/usr/local/bin/pydocstyle"
+            },
+            "[python]": {
+                "editor.defaultFormatter": "ms-python.black-formatter",
+                "editor.formatOnType": true,
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "always"
+                },
+                "editor.rulers": [
+                    100
+                ]
+            },
+            "isort.args": [
+                "--profile",
+                "black"
+            ],
+            "black-formatter.args": [
+                "--line-length",
+                "99"
+            ],
+            "files.trimTrailingWhitespace": true,
+            "files.insertFinalNewline": true,
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "batisteo.vscode-django",
+                "ms-python.black-formatter",
+                "ms-python.isort"
+            ]
+        }
+    },
+    "forwardPorts": [8000],
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteUser": "root"
+}

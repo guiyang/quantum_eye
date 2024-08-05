@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+      args:
+        - HTTP_PROXY=http://10.1.1.18:20171
+        - HTTPS_PROXY=http://10.1.1.18:20171
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - http_proxy=http://10.1.1.18:20171
+      - https_proxy=http://10.1.1.18:20171
+      - no_proxy=localhost,127.0.0.1,10.1.1.17,10.1.1.18,10.1.1.218,db,redis
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    env_file:
+      - .env
+    command: sleep infinity
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+      args:
+        - HTTP_PROXY=http://10.1.1.18:20171
+        - HTTPS_PROXY=http://10.1.1.18:20171
+    ports:
+      - "8030:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - http_proxy=http://10.1.1.18:20171
+      - https_proxy=http://10.1.1.18:20171
+      - no_proxy=localhost,127.0.0.1,10.1.1.17,10.1.1.18,10.1.1.218,db,redis
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    command: sleep infinity
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - .env
+
+volumes:
+  mysql_data:

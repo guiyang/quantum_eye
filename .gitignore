@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Next.js / Node
+node_modules/
+.next/
+out/
+.npm
+*.tsbuildinfo
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.docker/
+
+# Virtual environment
+venv/
+.env
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Elasticsearch
+elasticsearch/data/
+
+# Logs
+logs/
+*.log
+
+# Other
+*.bak
+*.tmp
+*.temp
+
+# Sensitive information
+*.pem
+*.key
