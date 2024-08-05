@@ -24,6 +24,8 @@ services:
     env_file:
       - .env
     command: sleep infinity
+    networks:
+      - quantumeye-network
     depends_on:
       - db
 
@@ -35,7 +37,7 @@ services:
         - HTTP_PROXY=http://10.1.1.18:20171
         - HTTPS_PROXY=http://10.1.1.18:20171
     ports:
-      - "8030:3000"
+      - "3000:3000"
     volumes:
       - ./frontend:/app
     environment:
@@ -44,6 +46,8 @@ services:
       - no_proxy=localhost,127.0.0.1,10.1.1.17,10.1.1.18,10.1.1.218,db,redis
       - NEXT_PUBLIC_API_URL=http://backend:8000
     command: sleep infinity
+    networks:
+      - quantumeye-network
     depends_on:
       - backend
 
@@ -61,6 +65,12 @@ services:
       - mysql_data:/var/lib/mysql
     env_file:
       - .env
+    networks:
+      - quantumeye-network
 
 volumes:
   mysql_data:
+
+networks:
+  quantumeye-network:
+    driver: bridge

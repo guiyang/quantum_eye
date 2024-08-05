@@ -4,6 +4,7 @@
     "service": "frontend",
     "workspaceFolder": "/app",
     "customizations": {
+        "runArgs": ["--network=quantum_eye_quantumeye-network"],
         "vscode": {
             "settings": {
                 "terminal.integrated.shell.linux": "/bin/bash"

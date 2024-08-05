@@ -1,14 +1,26 @@
+// File: next.config.mjs
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'http://backend:8000/api/:path*',
-        },
-      ];
-    },
-  };
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.BACKEND_URL || 'http://backend:8000'}/api/:path*`,
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/api-debug',
+        destination: `${process.env.BACKEND_URL || 'http://localhost:8000'}/api/hello`,
+        permanent: false,
+      },
+    ];
+  },
+};
 
-  module.exports = nextConfig;
+console.log('Backend URL:', process.env.BACKEND_URL || 'http://backend:8000');
+
+export default nextConfig;
