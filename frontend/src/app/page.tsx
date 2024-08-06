@@ -1,12 +1,21 @@
-// File: src/app/page.tsx
+import ECommerce from "@/components/Dashboard/E-commerce";
+import QEDashboard from "@/components/Dashboard/QE-Dashboard";
+import { Metadata } from "next";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-import HelloFromDjango from './components/HelloFromDjango';
+export const metadata: Metadata = {
+  title:
+    "UBA数据安全管理平台",
+  description: "UBA数据安全管理平台",
+};
 
 export default function Home() {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Welcome to QuantumEye</h1>
-      <HelloFromDjango />
-    </div>
+    <>
+      <DefaultLayout>
+        {/* <ECommerce /> */}
+        <QEDashboard />
+      </DefaultLayout>
+    </>
   );
 }
